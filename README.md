@@ -1,4 +1,4 @@
-# diploma
+# skillbox2
 
 ## Project setup
 ```
