@@ -64,6 +64,7 @@ export default new Vuex.Store({
         amount: item.quantity,
         colors: item.color,
         id: item.id,
+        size: item.size,
       }));
     },
     updateProductsLoadingFailed(state) {

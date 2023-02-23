@@ -12,17 +12,21 @@
                   {{ item.colors.color.title }}
                 </span>
               </p>
+
+    <span class="product__size"> Размер: {{ item.size.title }} </span>
     <span class="product__code"> Артикул: {{ item.product.id }} </span>
 
     <div class="product__counter form__counter">
       <button type="button" aria-label="Убрать один товар"
-      @click.prevent="decreaseProduct(item.id, item.amount)">
+      @click.prevent="decreaseProduct(item.id, item.amount)"
+       :class="{'pagination__link--disabled': amount === 1}"
+      >
         <svg width="10" height="10" fill="currentColor">
           <use xlink:href="#icon-minus"></use>
         </svg>
       </button>
 
-      <input type="text" v-model.number="amount" name="count" />
+      <input type="number" v-model.number="amount" name="count" />
 
       <button type="button" aria-label="Добавить один товар"
       @click.prevent="addProduct">

@@ -33,9 +33,9 @@
 </template>
 
 <script>
-import ProductList from '@/components/ProductList.vue';
-import BasePaginition from '@/components/BasePaginition.vue';
-import ProductFilter from '@/components/ProductFilter.vue';
+import ProductList from '@/components/Product/ProductList.vue';
+import BasePaginition from '@/components/Base/BasePaginition.vue';
+import ProductFilter from '@/components/Product/ProductFilter.vue';
 import axios from 'axios';
 import { API_BASE_URL } from '@/config';
 
@@ -45,7 +45,7 @@ export default {
     return {
       filterPriceFrom: 0,
       filterPriceTo: 0,
-      filterCategoryId: 0,
+      filterCategoryId: this.$route.params.data,
       page: 1,
       perPage: 3,
       productFilterColor: [],
@@ -68,6 +68,9 @@ export default {
     },
     countProducts() {
       return this.productsData ? this.productsData.pagination.total : 0;
+    },
+    id() {
+      return this.data;
     },
   },
   methods: {

@@ -26,6 +26,15 @@
         </label>
       </li>
     </ul>
+    <legend class="form__legend">Размер</legend>
+                <label class="form__label form__label--small form__label--select" for="name"
+                 style="width: 90px;">
+                  <select class="form__select" type="text" v-model="size">
+                    <option :value="size.id"
+                     v-for="size in sizes" :key="size.id"
+                    >{{ size.title }}</option>
+                  </select>
+     </label>
     <button class="button button--primery" type="button"
     @click.prevent="addToCart">В корзину</button>
   </li>
@@ -45,6 +54,8 @@ export default {
     return {
       color: this.product.colors[0].color.id,
       image: this.product.colors[0].gallery[0].file.url,
+      size: '',
+      sizes: [],
     };
   },
   computed: {
@@ -59,18 +70,24 @@ export default {
     gotoPage,
     ...mapActions(['addProductToCart']),
     addToCart() {
+      this.addProductToCart({
+        productId: this.product.id,
+        amount: 1,
+        colorId: this.color,
+        sizeId: this.size,
+      });
+    },
+    addSize() {
       axios.get(`${API_BASE_URL}/api/products/${this.product.id}`)
         .then((response) => {
-          const size = response.data.sizes[0].id;
-          this.addProductToCart({
-            productId: this.product.id,
-            amount: 1,
-            colorId: this.color,
-            sizeId: size,
-          });
+          this.sizes = response.data.sizes;
+          this.size = response.data.sizes[0].id;
         });
     },
   },
   props: ['product'],
+  created() {
+    this.addSize();
+  },
 };
 </script>

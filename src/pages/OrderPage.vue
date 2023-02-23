@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
      <main class="content container">
     <div class="content__top">
@@ -54,7 +55,8 @@
              :error="formError.phone"
              placeholder="Введите ваш телефон"
              v-model="formData.phone"
-             type="tel"/>
+             type="tel"
+             v-mask = " ' +7(###)-###-##-## ' "/>
 
              <BaseFormText
              title="Email"
@@ -135,8 +137,8 @@
 </template>
 
 <script>
-import BaseFormText from '@/components/BaseFormText.vue';
-import BaseFormTextarea from '@/components/BaseFormTextarea.vue';
+import BaseFormText from '@/components/Base/BaseFormText.vue';
+import BaseFormTextarea from '@/components/Base/BaseFormTextarea.vue';
 import namberFormat from '@/helpers/namberFormat';
 import { mapGetters } from 'vuex';
 import axios from 'axios';

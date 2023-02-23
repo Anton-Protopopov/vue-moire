@@ -116,7 +116,8 @@
       </fieldset>
 
       <button class="filter__submit button button--primery" type="submit">Применить</button>
-      <button class="filter__reset button button--second" type="button" @click.prevent="reset">
+      <button class="filter__reset button button--second" type="button" @click.prevent="reset"
+      :class="{'none': resetButtom}">
         Сбросить
       </button>
     </form>
@@ -133,7 +134,7 @@ export default {
       currentPriceFrom: 0,
       currentPriceTo: 0,
       currentCategoryId: 0,
-      currentPerPage: 0,
+      currentPerPage: 3,
       currentFilterColor: [],
       currentFilterMaterials: [],
       currentFilterCollections: [],
@@ -155,6 +156,18 @@ export default {
     'perPage',
   ],
   computed: {
+    resetButtom() {
+      if (this.currentPriceFrom === 0
+       && this.currentPriceTo === 0
+       && this.categoryId === 0
+       && this.perPage < 8
+       && this.currentFilterColor.length === 0
+       && this.currentFilterMaterials.length === 0
+       && this.currentFilterCollections.length === 0) {
+        return true;
+      }
+      return false;
+    },
     categories() {
       return this.categoriesData ? this.categoriesData.items : [];
     },

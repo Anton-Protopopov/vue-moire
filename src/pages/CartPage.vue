@@ -36,6 +36,7 @@
 
           <router-link tag="button" :to="{ name: 'order'}"
            class="cart__button button button--primery"
+           :class="{'none': totalPrice === 0}"
            type="submit">Оформить заказ</router-link>
         </div>
       </form>
@@ -47,7 +48,7 @@
 <script>
 import namberFormat from '@/helpers/namberFormat';
 import { mapGetters } from 'vuex';
-import CardItem from '@/components/CartItem.vue';
+import CardItem from '@/components/Cart/CartItem.vue';
 
 export default {
   filters: { namberFormat },

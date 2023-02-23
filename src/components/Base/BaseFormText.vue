@@ -6,8 +6,9 @@
     <input
       class="form__input"
       v-model="dataValue"
-      type="type"
+      :type="type"
       :placeholder="placeholder"
+      v-mask="''"
     />
   </BaseFormField>
 </template>

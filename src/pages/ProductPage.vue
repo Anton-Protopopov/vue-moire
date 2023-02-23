@@ -12,7 +12,8 @@
           <router-link class="breadcrumbs__link" :to="{name: 'main'}"> Каталог</router-link>
         </li>
         <li class="breadcrumbs__item">
-          <router-link class="breadcrumbs__link" :to="({name: 'main'})"
+          <router-link class="breadcrumbs__link" :to="({name: 'main',
+           params: { data: category.id }})"
            > {{category.title}} </router-link>
         </li>
         <li class="breadcrumbs__item">
@@ -31,6 +32,15 @@
             :alt="product.title"
           />
         </div>
+        <ul class="pics__list">
+          <li class="pics__item" v-for="colors in product.colors" :key="colors.color.id">
+              <img width="98"
+              v-for="gallery in colors.gallery" :key="gallery.file.name"
+                height="98"
+                :src="gallery.file.url"
+                :alt="product.title">
+          </li>
+        </ul>
       </div>
 
       <div class="item__info">
@@ -41,13 +51,15 @@
             <div class="item__row">
               <div class="form__counter">
                 <button type="button" aria-label="Убрать один товар"
+                :class="{'pagination__link--disabled'
+            : productAmount === 1}"
                 @click="productAmountBack">
                   <svg width="12" height="12" fill="currentColor">
                     <use xlink:href="#icon-minus"></use>
                   </svg>
                 </button>
 
-                <input type="text" v-model.number="productAmount"/>
+                <input type="number" v-model.number="productAmount"/>
 
                 <button type="button" aria-label="Добавить один товар"
                 @click="productAmountNext">
@@ -218,6 +230,5 @@ export default {
       immediate: true,
     },
   },
-
 };
 </script>
